@@ -31,7 +31,7 @@ class ScrapPublisherWebsite:
                 link=links[i - 1].get('href'),
                 place=places[i - 1].get_text()
             )
-            print(job.date)
+
             jobs.append(job)
 
         return jobs

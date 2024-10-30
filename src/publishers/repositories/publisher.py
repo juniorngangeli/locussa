@@ -12,6 +12,7 @@ class PublisherRepository:
     def __init__(self):
         self.table = "publishers"
         self.airtable = airtable.Airtable(airtable_database_id, airtable_token)
+        self.airtable.create()
     
     def get_publishers(self):
         publisher_records = self.airtable.get(table_name=self.table)
