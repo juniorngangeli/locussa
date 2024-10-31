@@ -17,6 +17,7 @@ class ScrapPublisherWebsite:
         links = soup.select(selector=self.publisher.link_selector)
         companies = soup.select(selector=self.publisher.company_selector)
         places = soup.select(selector=self.publisher.place_selector)
+        descriptions = soup.select(selector=self.publisher.description_selector)
         dates = soup.select(selector=self.publisher.date_selector)
 
         items_count = len(links)
@@ -24,12 +25,14 @@ class ScrapPublisherWebsite:
         jobs = []
         for i in range(0, items_count):
             published_at = parser.parse(timestr=dates[i - 1].get_text()).strftime("%Y-%m-%d")
+            link = self.publisher.website + '/' + links[i - 1].get('href').replace('//', '/');
             job = JobDTO(
                 title=titles[i - 1].get_text(),
                 company= companies[i - 1].get_text(),
                 date=published_at,
-                link=links[i - 1].get('href'),
-                place=places[i - 1].get_text()
+                link= link,
+                place=places[i - 1].get_text(),
+                description=descriptions[i - 1].get_text(),
             )
 
             jobs.append(job)

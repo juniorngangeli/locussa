@@ -12,7 +12,6 @@ class PublisherRepository:
     def __init__(self):
         self.table = "publishers"
         self.airtable = airtable.Airtable(airtable_database_id, airtable_token)
-        self.airtable.create()
     
     def get_publishers(self):
         publisher_records = self.airtable.get(table_name=self.table)
@@ -26,7 +25,8 @@ class PublisherRepository:
                 link_selector=fields['Link Selector'],
                 place_selector=fields['Place Selector'],
                 scrapping_url=fields['Scrapping URL'],
-                title_selector=fields['Title Selector']
+                title_selector=fields['Title Selector'],
+                description_selector=fields['Description Selector'],
             )
             publishers.append(publisher)
         
